@@ -1,0 +1,6 @@
+jpa\JpaTest.class
+domain\Home.class
+domain\Heater.class
+domain\Person.class
+domain\User.class
+domain\ElectronicDevices.class

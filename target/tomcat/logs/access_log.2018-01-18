@@ -1,0 +1,9 @@
+0:0:0:0:0:0:0:1 - - [18/Jan/2018:11:32:49 +0100] "POST /Service/hello/createHome HTTP/1.1" 200 73 http-bio-8080-exec-2 5405
+0:0:0:0:0:0:0:1 - - [18/Jan/2018:11:33:38 +0100] "GET /Service/hello/homes HTTP/1.1" 200 523 http-bio-8080-exec-3 1221
+0:0:0:0:0:0:0:1 - - [18/Jan/2018:11:34:01 +0100] "GET /Service/hello/homes/1/HomesPerson HTTP/1.1" 200 12 http-bio-8080-exec-4 606
+0:0:0:0:0:0:0:1 - - [18/Jan/2018:11:34:13 +0100] "GET /Service/hello/homes/4/HomesPerson HTTP/1.1" 200 12 http-bio-8080-exec-5 575
+0:0:0:0:0:0:0:1 - - [18/Jan/2018:11:34:20 +0100] "GET /Service/hello/homes/2/HomesPerson HTTP/1.1" 200 12 http-bio-8080-exec-6 503
+0:0:0:0:0:0:0:1 - - [18/Jan/2018:11:35:49 +0100] "POST /Service/hello/createPerson HTTP/1.1" 200 179 http-bio-8080-exec-9 712
+0:0:0:0:0:0:0:1 - - [18/Jan/2018:11:36:24 +0100] "GET /Service/hello/homes/1/HomesPerson HTTP/1.1" 200 73 http-bio-8080-exec-10 567
+0:0:0:0:0:0:0:1 - - [18/Jan/2018:11:38:36 +0100] "GET /Service/hello/persons HTTP/1.1" 200 1055 http-bio-8080-exec-2 6114
+0:0:0:0:0:0:0:1 - - [18/Jan/2018:11:39:05 +0100] "GET /Service/hello/persons/1/HomesPerson HTTP/1.1" 200 73 http-bio-8080-exec-3 657
