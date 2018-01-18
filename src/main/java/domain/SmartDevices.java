@@ -11,9 +11,12 @@ import javax.persistence.InheritanceType;
 
  * */
  
-@DiscriminatorColumn(name="TYPE_DEVICE")
-@DiscriminatorValue(value="smart")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name="TYPE_DEVICE")
+//@DiscriminatorValue(value="smart")
+//@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+ @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+ 
+
 @Entity
 
 public class SmartDevices {
