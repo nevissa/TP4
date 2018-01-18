@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 urlPatterns={"/myurl"})
 public class MaServlet extends HttpServlet {
 
-  /*  @Override
+   @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
             
@@ -28,5 +28,5 @@ public class MaServlet extends HttpServlet {
             throws ServletException, IOException {
         // TODO Auto-generated method stub
         super.doPost(req, resp);
-    } */   
+    }   
 }
