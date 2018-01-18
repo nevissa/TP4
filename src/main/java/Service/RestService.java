@@ -14,8 +14,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-
-import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import DAO.*;
 import domain.*;
@@ -24,72 +22,77 @@ import domain.*;
 public class RestService implements IService {
 
 	private IGENERIC dao = new DAOIMPL();
+	
+	
 
-	@POST
-	@Path("/createUser")
-	// @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	// par contre il faut cocher sur x-www-form-urlencoded
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public User ajouterUser(JSONObject JSonUser) throws JSONException {
-		User user = new User();
-		user.setFirstName(JSonUser.getString("nom"));
-		user.setLastName(JSonUser.getString("prenom"));
-		System.out.println(user.getFirstName());
-
-		dao.creerObject(user);
-		return user;
-	}
-
-	@POST
-	@Path("/createHeater")
-	// @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	// par contre il faut cocher sur x-www-form-urlencoded
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes("application/x-www-form-urlencoded")
-	public Heater ajouterHeater(@FormParam("power") String power,@FormParam("id_home") int id_home) {
-		Heater heater = new Heater();
-		heater.setPower(power);
-		Home home=dao.findHomeById(id_home);
-		home.ajouterHeater(heater);
-		dao.creerObject(heater);
+	 	
+	 	@POST
+	 	@Path("/createUser")
+	 	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	 	//par contre il faut cocher sur x-www-form-urlencoded
+        @Produces(MediaType.APPLICATION_JSON)
+	 	@Consumes("application/x-www-form-urlencoded")
+	 	public  User ajouterUser(@FormParam("firstname")String firstname, @FormParam("lastname")String lastname) {
+	 		User user = new User();
+	         user.setFirstName(firstname);
+	         user.setLastName(lastname);
+	 		dao.creerObject(user);
+	 	     return user;
+	 	     }
+	 	
+		@POST
+	 	@Path("/createHeater")
+	 	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	 	//par contre il faut cocher sur x-www-form-urlencoded
+        @Produces(MediaType.APPLICATION_JSON)
+	 	@Consumes("application/x-www-form-urlencoded")
+	 	public  Heater ajouterHeater(@FormParam("power")String power) {
+	 	Heater heater= new Heater();
+	     heater.setPower(power);
+	 	 dao.creerObject(heater);
+	 	     return heater;
+	 	     }
 		
-		return heater;
-	}
+		@POST
+	 	@Path("/createPerson")
+	 	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	 	//par contre il faut cocher sur x-www-form-urlencoded
+        @Produces(MediaType.APPLICATION_JSON)
+	 	@Consumes("application/x-www-form-urlencoded")
+	 	public  Person ajouterPerson(@FormParam("nom")String nom,@FormParam("prenom")String prenom,@FormParam("email")String email,@FormParam("idHome")int idhome) {
+	 	Person person= new Person();
+	 	person.setNom(nom);
+	 	person.setPrenom(prenom);
+	 	person.setEmail(email);
+	 	person.ajouterHome(dao.findHomeById(idhome));
+	 	dao.creerObject(person);
+	 	return person;
+	 	     }
+		
+		
+		
+		
+		
+		
+		
+		
+		@POST
+	 	@Path("/createHome")
+	 	//@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	 	//par contre il faut cocher sur x-www-form-urlencoded
+        @Produces(MediaType.APPLICATION_JSON)
+	 	@Consumes("application/x-www-form-urlencoded")
+	 	public  Home ajouterHome(@FormParam("taille")int taille,@FormParam("nbpieces")int nbpiece,@FormParam("name")String name) {
+	 	Home home= new Home();
+        home.setNbpeices(nbpiece);	
+        home.setTaille(taille);
+        home.setName(name);
+        dao.creerObject(home);
+	     return home;
+	 	     }
+	 	
+	 	
 
-	@POST
-	@Path("/createPerson")
-	// @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	// par contre il faut cocher sur x-www-form-urlencoded
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes("application/x-www-form-urlencoded")
-	public Person ajouterPerson(@FormParam("nom") String nom, @FormParam("prenom") String prenom,
-			@FormParam("email") String email) {
-		Person person = new Person();
-		person.setNom(nom);
-		person.setPrenom(prenom);
-		person.setEmail(email);
-		dao.creerObject(person);
-		return person;
-	}
-
-	@POST
-	@Path("/createHome")
-	// @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	// par contre il faut cocher sur x-www-form-urlencoded
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes("application/x-www-form-urlencoded")
-	public Home ajouterHome(@FormParam("taille") int taille, @FormParam("nbpieces") int nbpiece,
-			@FormParam("name") String name, @FormParam("id_person") int id_person) {
-		Home home = new Home();
-		home.setNbpeices(nbpiece);
-		home.setTaille(taille);
-		home.setName(name);
-		Person person =dao.findPersonById(id_person);
-		person.ajouterHome(home);
-		dao.creerObject(home);
-		return home;
-	}
 
 	@GET
 	@Path("/homes")
@@ -116,7 +119,7 @@ public class RestService implements IService {
 	@Path("/Electronics")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<ElectronicDevices> getElectronic() {
-		return dao.getElectronics();
+		return dao.getElectronic();
 	}
 
 	@GET
@@ -126,24 +129,23 @@ public class RestService implements IService {
 		return dao.getUsers();
 
 	}
-
+	
 	@GET
 	@Path("/Persons/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Person findPersonById(@PathParam(value = "id") int id) {
+	public Person findPersonById(@PathParam(value="id")int id){
 		return dao.findPersonById(id);
 
 	}
-
 	@GET
 	@Path("/Users/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public User findUserById(@PathParam(value = "id") int id) {
+	public User findUserById(@PathParam(value="id")int id){
 		return dao.findUserById(id);
 
 	}
 
-	public Home findHomeById(int id) {
+public Home findHomeById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -157,20 +159,16 @@ public class RestService implements IService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@GET
 	@Path("/persons/{id}/HomesPerson")
 	@Produces(MediaType.APPLICATION_JSON)
 
-	public List<Home> getHomeParPersonne(@PathParam(value = "id") int id) {
+	public List<Home> getHomeParPersonne(@PathParam(value="id")int id) {
 		return dao.getHomeParPersonne(id);
 	}
-	@GET
-	@Path("/persons/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
 
-	public Person getInfoPerson(@PathParam(value = "id") int id) {
-		return dao.findPersonById(id);
-	}
+	
 
+	
+	
 }

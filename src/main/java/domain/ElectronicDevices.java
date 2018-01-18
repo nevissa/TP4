@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-//@DiscriminatorValue(value="electronique")
+@DiscriminatorValue(value="electronique")
 
 public class ElectronicDevices extends SmartDevices{
 

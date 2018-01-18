@@ -3,7 +3,7 @@ import domain.SmartDevices;
 
 import javax.persistence.*;
 @Entity
-//@DiscriminatorValue(value="chauffage")
+@DiscriminatorValue(value="chauffage")
 
 public class Heater extends SmartDevices {
 
